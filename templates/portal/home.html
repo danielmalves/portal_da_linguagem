@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Linguista, Tradutor, Interprete e Data Storyteller{% endblock %}
+
+{% block content %}
+<main class="page-shell">
+    <section class="section-grid" id="services">
+        <div class="section-heading">
+            <p class="eyebrow">Service architecture</p>
+            <h2>Three clear pillars for the site</h2>
+        </div>
+        <div class="cards">
+            {% for category in service_categories %}
+            <article class="card">
+                <h3>{{ category.title }}</h3>
+                <p>{{ category.description }}</p>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+    <section class="hero">
+        <div class="hero-copy">
+            <p class="eyebrow">Language services and analytical practice</p>
+            <h1>A professional site for linguistic work, commissioned services, and data-driven insight.</h1>
+            <p class="lead">
+    Atuo com tradução técnica desde 2003, com experiência inicial na área farmacêutica e atendimento a clientes internacionais. Ao longo do tempo, consolidei uma base recorrente de trabalho e ampliei minha atuação para diferentes domínios técnicos, com uso de ferramentas de apoio à tradução e envolvimento em revisão e tratamento técnico de arquivos.
+Paralelamente, desenvolvi interesse pela área de tecnologia, o que me levou, em 2006, a atuar com qualidade de dados. Entre 2008 e 2010, colaborei com a Editora Ciência Moderna na tradução de livros técnicos de programação, com foco em bancos de dados e frameworks de desenvolvimento.
+Em 2011, participei de um projeto de implementação de CRM com a Caixa Econômica Federal, pela Infor. A partir de 2013, passei a atuar em integração de sistemas, desenvolvendo queries com base em padrões arquiteturais e documentação técnica.
+Desde 2018, integro a equipe de tradução e interpretação sediada no Palácio Itamaraty, no âmbito da Agência Brasileira de Cooperação (ABC), onde atualmente atuo como tradutor responsável, com foco na organização e distribuição equilibrada das demandas.
+Em 2019, concluí uma pós-graduação em Business Intelligence, consolidando minha atuação também na área de dados.
+Hoje, aplico esse conhecimento na estruturação e análise de dados operacionais da equipe, desenvolvendo modelos e relatórios de desempenho que apoiam a gestão e a tomada de decisão.
+Minha atuação se concentra na interface entre linguagem e tecnologia, integrando tradução técnica, dados e sistemas em um único fluxo de trabalho.
+            </p>
+            <div class="hero-actions">
+                <a class="button button-primary" href="#services">Explore services</a>
+                <a class="button button-secondary" href="#data-work">View data focus</a>
+            </div>
+        </div>
+        <aside class="hero-panel">
+            <p class="panel-label">Current foundation</p>
+            <ul>
+                {% for item in highlights %}
+                <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </aside>
+    </section>
+
+
+    <section class="feature-split" id="data-work">
+        <div>
+            <p class="eyebrow">First visualization track</p>
+            <h2>Your own professional output can become the first analytical narrative.</h2>
+        </div>
+        <div>
+            <p>
+                A strong first project is to visualize your translation, interpreting, and revision activity over time:
+                volume, language pairs, subject areas, delivery rhythms, and service mix. That gives the site both a
+                portfolio function and a quantified professional identity.
+            </p>
+            <p>
+                The current cleanup establishes the public shell so the next development step can focus on intake forms,
+                content sections, and the first data exploration.
+            </p>
+        </div>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,197 @@
+erDiagram
+    ACCOUNTS_USER ||--o| ACCOUNTS_CUSTOMER_PROFILE : has
+    ACCOUNTS_USER ||--o| ACCOUNTS_LINGUIST_PROFILE : has
+
+    ACCOUNTS_CUSTOMER_PROFILE ||--o{ ORDERS_SERVICE_REQUEST : creates
+
+    ORDERS_SERVICE_REQUEST ||--o{ FILES_ATTACHMENT : has
+    ORDERS_SERVICE_REQUEST ||--|| QUOTES_QUOTE : priced_by
+    ORDERS_SERVICE_REQUEST ||--o{ STAFFING_ASSIGNMENT : staffed_by
+    ORDERS_SERVICE_REQUEST ||--o{ PAYMENTS_PAYMENT : paid_by
+    ORDERS_SERVICE_REQUEST ||--|| BILLING_INVOICE : invoiced_by
+
+    BILLING_INVOICE ||--|| BILLING_NFSE_RECORD : issues
+
+    ACCOUNTS_LINGUIST_PROFILE ||--o{ STAFFING_ASSIGNMENT : works_on
+    ACCOUNTS_LINGUIST_PROFILE ||--o{ ACCOUNTS_LANGUAGE_PAIR : supports
+
+
+    ACCOUNTS_USER {
+        uuid id PK
+        varchar email "UNIQUE, INDEX"
+        text password_hash
+        boolean is_active
+        boolean is_staff
+        boolean is_superuser
+        timestamp last_login
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    ACCOUNTS_CUSTOMER_PROFILE {
+        uuid id PK
+        uuid user_id FK "UNIQUE -> ACCOUNTS_USER.id"
+
+        enum residency "BR|FOREIGN, INDEX"
+        enum customer_type "INDIVIDUAL|COMPANY, INDEX"
+        varchar legal_name
+        char2 country "INDEX"
+        varchar phone "NULLABLE"
+
+        varchar tax_id_br "NULLABLE, INDEX (CPF/CNPJ)"
+        varchar foreign_tax_id "NULLABLE, INDEX"
+        varchar foreign_tax_id_type "NULLABLE (VAT/NIF/EIN/PASSPORT/OTHER)"
+        text foreign_tax_id_absent_reason "NULLABLE"
+
+        varchar address_line1
+        varchar address_line2 "NULLABLE"
+        varchar city
+        varchar region "NULLABLE"
+        varchar postal_code "NULLABLE"
+
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    ACCOUNTS_LINGUIST_PROFILE {
+        uuid id PK
+        uuid user_id FK "UNIQUE -> ACCOUNTS_USER.id"
+
+        varchar timezone "NULLABLE"
+        boolean is_active "INDEX"
+
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    ACCOUNTS_LANGUAGE_PAIR {
+        uuid id PK
+        uuid linguist_id FK "-> ACCOUNTS_LINGUIST_PROFILE.id, INDEX"
+
+        char5 source_lang "INDEX"
+        char5 target_lang "INDEX"
+
+        timestamp created_at
+        %% UNIQUE(linguist_id, source_lang, target_lang)
+    }
+
+    ORDERS_SERVICE_REQUEST {
+        uuid id PK
+        uuid customer_id FK "-> ACCOUNTS_CUSTOMER_PROFILE.id, INDEX"
+
+        enum service_type "TRANSLATION|INTERPRETATION|REVISION, INDEX"
+        char5 source_lang "INDEX"
+        char5 target_lang "INDEX"
+        varchar subject_area "NULLABLE, INDEX"
+
+        timestamp deadline_at "INDEX"
+        text instructions "NULLABLE"
+
+        enum status "DRAFT|SUBMITTED|QUOTED|APPROVED|ASSIGNED|IN_PROGRESS|DELIVERED|CLOSED|CANCELED, INDEX"
+
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    FILES_ATTACHMENT {
+        uuid id PK
+
+        uuid service_request_id FK "NULLABLE -> ORDERS_SERVICE_REQUEST.id, INDEX"
+        uuid assignment_id FK "NULLABLE -> STAFFING_ASSIGNMENT.id, INDEX"
+        uuid uploaded_by_user_id FK "-> ACCOUNTS_USER.id, INDEX"
+
+        enum kind "SOURCE|REFERENCE|DELIVERABLE|OTHER, INDEX"
+        text storage_key
+        varchar original_filename
+        varchar content_type "NULLABLE"
+        bigint size_bytes "NULLABLE"
+
+        timestamp created_at
+        %% CHECK: (service_request_id IS NOT NULL) XOR (assignment_id IS NOT NULL)
+    }
+
+    QUOTES_QUOTE {
+        uuid id PK
+        uuid service_request_id FK "UNIQUE -> ORDERS_SERVICE_REQUEST.id"
+
+        char3 currency
+        numeric amount_total "12,2"
+
+        jsonb breakdown_json "NULLABLE"
+        timestamp valid_until "INDEX"
+
+        enum status "DRAFT|SENT|ACCEPTED|EXPIRED|CANCELED, INDEX"
+
+        timestamp accepted_at "NULLABLE, INDEX"
+        text terms_snapshot "NULLABLE"
+
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    STAFFING_ASSIGNMENT {
+        uuid id PK
+        uuid service_request_id FK "-> ORDERS_SERVICE_REQUEST.id, INDEX"
+        uuid linguist_id FK "-> ACCOUNTS_LINGUIST_PROFILE.id, INDEX"
+
+        enum assignment_type "TRANSLATION|INTERPRETATION|REVISION, INDEX"
+        enum status "INVITED|ACCEPTED|DECLINED|IN_PROGRESS|DELIVERED|APPROVED, INDEX"
+
+        timestamp deadline_at "INDEX"
+        text instructions "NULLABLE"
+
+        jsonb agreed_rate_snapshot "NULLABLE"
+
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    PAYMENTS_PAYMENT {
+        uuid id PK
+        uuid service_request_id FK "-> ORDERS_SERVICE_REQUEST.id, INDEX"
+
+        varchar provider "INDEX"
+        varchar provider_reference "INDEX"
+        enum status "PENDING|CONFIRMED|FAILED|REFUNDED, INDEX"
+
+        numeric amount "12,2"
+        char3 currency
+
+        timestamp confirmed_at "NULLABLE, INDEX"
+        timestamp created_at
+        %% UNIQUE(provider, provider_reference)
+    }
+
+    BILLING_INVOICE {
+        uuid id PK
+        uuid service_request_id FK "UNIQUE -> ORDERS_SERVICE_REQUEST.id"
+
+        numeric amount "12,2"
+        char3 currency
+
+        enum status "PENDING|ISSUED|ERROR|CANCELED, INDEX"
+        timestamp issued_at "NULLABLE, INDEX"
+
+        jsonb customer_snapshot_json "NULLABLE"
+
+        timestamp created_at
+    }
+
+    BILLING_NFSE_RECORD {
+        uuid id PK
+        uuid invoice_id FK "UNIQUE -> BILLING_INVOICE.id"
+
+        varchar provider "INDEX"
+        varchar protocol "NULLABLE, INDEX"
+        varchar nfse_number "NULLABLE, INDEX"
+
+        enum status "SUBMITTED|ISSUED|ERROR, INDEX"
+
+        text pdf_storage_key "NULLABLE"
+        text xml_storage_key "NULLABLE"
+
+        text error_message "NULLABLE"
+
+        timestamp created_at
+        timestamp updated_at
+    }

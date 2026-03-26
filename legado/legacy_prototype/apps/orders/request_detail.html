@@ -1,0 +1,8 @@
+<script src="https://unpkg.com/htmx.org@1.9.12"></script>
+<div id="quote-panel">
+  {% if req.quote %}
+    {% include "quotes/_quote_panel.html" with quote=req.quote req=req %}
+  {% else %}
+    <div class="p-4 border rounded-xl opacity-70">Nenhuma cotação ainda.</div>
+  {% endif %}
+</div>

@@ -1,0 +1,24 @@
+apps/
+  accounts/
+    models.py
+    admin.py
+  orders/
+    models.py
+    admin.py
+  staffing/
+    models.py
+    admin.py
+  files/
+    models.py
+    admin.py
+  quotes/
+    models.py
+    admin.py
+  payments/
+    models.py
+    admin.py
+  billing/
+    models.py
+    admin.py
+  core/
+    models.py   # TimestampedModel, validators, shared enums if you want
