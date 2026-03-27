@@ -1,0 +1,4 @@
+source_id,source_name,source_type,source_url,notes
+ISO3166,ISO 3166 Country Codes,standard,https://www.iso.org/iso-3166-country-codes.html,Country identity codes
+ISO639,ISO 639 Language Codes,standard,https://www.iso.org/iso-639-language-code.html,Language code system
+UNESCO_WAL,UNESCO World Atlas of Languages,atlas,https://www.unesco.org/en/world-atlas-languages,Primary atlas reference

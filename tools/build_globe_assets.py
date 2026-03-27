@@ -7,6 +7,10 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from geobr import read_state
 
+#=============================================================================
+# CONFIGURAÇÃO DE DIRETÓRIOS E CONSTANTES
+#=============================================================================
+
 TOOLS_DIR = Path(__file__).resolve().parent
 ROOT_DIR = TOOLS_DIR.parent
 
@@ -18,7 +22,7 @@ DPI = 300
 
 COUNTRIES_PATH = TOOLS_DIR / "ne_50m_admin_0_countries.json"
 CAPITALS_PATH = TOOLS_DIR / "ne_50m_populated_places.json"
-
+# Paletas de cores para as regiões, escolhidas para serem distintas e agradáveis visualmente.
 PALETTE = [
     "#2E86AB",
     "#F6AE2D",
@@ -30,7 +34,9 @@ PALETTE = [
     "#E55934",
 ]
 
-
+#=============================================================================
+#  FUNÇÕES AUXILIARES
+#=============================================================================
 def stable_color(key: str) -> str:
     digest = hashlib.sha256(key.encode("utf-8")).hexdigest()
     return PALETTE[int(digest[:8], 16) % len(PALETTE)]

@@ -1,0 +1,38 @@
+{
+  "name": "portal_da_linguagem",
+  "version": "1.0.0",
+  "description": "Current active application surface: - `config`: Django project configuration. - `apps/core`: shared utilities and validators. - `apps/portal`: public-facing website entry point. - `templates/portal` and `static/css`: current site presentation.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build:css": "tailwindcss -c tailwind.config.js -i ./static/src/tailwind.css -o ./static/css/tailwind.css",
+    "build:js": "node ./build-globe.cjs",
+    "build": "npm run build:css && npm run build:js",
+    "watch:css": "tailwindcss -c tailwind.config.js -i ./static/src/tailwind.css -o ./static/css/tailwind.css --watch",
+    "watch:js": "node ./build-globe.cjs --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielmalves/portal_da_linguagem.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/danielmalves/portal_da_linguagem/issues"
+  },
+  "homepage": "https://github.com/danielmalves/portal_da_linguagem#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "esbuild": "^0.27.4",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17"
+  },
+  "dependencies": {
+    "three": "^0.183.2"
+  }
+}

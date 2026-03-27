@@ -1,58 +1,133 @@
-{% extends "base.html" %}
+﻿{% extends "base.html" %}
+{% load static %}
 
 {% block title %}Linguista, Tradutor, Interprete e Data Storyteller{% endblock %}
 
 {% block content %}
-<main class="page-shell">
-    <section class="section-grid" id="services">
-        <div class="section-heading">
-            <p class="eyebrow">Service architecture</p>
-            <h2>Three clear pillars for the site</h2>
+<main class="mx-auto w-[min(1240px,calc(100%-2rem))] py-8 lg:py-10">
+    <section class="grid min-h-[82vh] gap-8 lg:grid-cols-[1fr_1fr] lg:items-stretch">
+        <div id="about" class="rounded-[28px] border border-stone-300/60 bg-white/80 p-8 shadow-soft backdrop-blur-md lg:h-full lg:p-12">
+            <p class="mb-4 text-xs font-bold uppercase tracking-[0.12em] text-teal-900">Language services and analytical practice</p>
+            <h1 class="max-w-xl font-display text-4xl font-bold leading-[0.95] tracking-tight text-stone-900 sm:text-5xl lg:text-6xl">
+                Professional language work, commissioned services, and data-driven insight.
+            </h1>
+            <p class="mt-6 max-w-2xl text-base leading-8 text-stone-600 sm:text-lg">
+                Atuo com tradução técnica desde 2003, com experiência inicial na área farmacêutica e atendimento a clientes
+                internacionais. Ao longo da carreira, ampliei minha atuação para diferentes domínios técnicos, combinando
+                tradução, revisão, tratamento de arquivos e uso de ferramentas de apoio à tradução.
+            </p>
+            <p class="mt-4 max-w-2xl text-base leading-8 text-stone-600 sm:text-lg">
+                Paralelamente, desenvolvi interesse pela área de tecnologia e passei a atuar com qualidade de dados,
+                integração de sistemas e documentação técnica. Desde 2018, integro a equipe de tradução e interpretação
+                sediada no Palácio Itamaraty, no âmbito da Agência Brasileira de Cooperação, e em 2019 concluí uma
+                pós-graduação em Business Intelligence.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3">
+                <a href="#services" class="inline-flex items-center justify-center rounded-full bg-teal-700 px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-teal-800">
+                    Explore services
+                </a>
+                <a href="#data-work" class="inline-flex items-center justify-center rounded-full bg-emerald-100 px-5 py-3 text-sm font-bold text-teal-950 transition hover:-translate-y-0.5 hover:bg-emerald-200">
+                    View data focus
+                </a>
+            </div>
         </div>
-        <div class="cards">
+
+        <aside aria-label="Globe visualization" class="group relative grid grid-rows-[auto_minmax(18rem,auto)_auto] overflow-visible rounded-[32px] border border-stone-300/60 bg-white/70 p-5 shadow-soft backdrop-blur-md lg:h-full lg:grid-rows-[auto_minmax(24rem,1fr)_auto] lg:min-h-0 lg:p-6">
+            <button
+                type="button"
+                data-globe-open
+                class="absolute left-4 top-4 z-30 inline-flex h-10 w-10 items-center justify-center rounded-full border border-emerald-200/80 bg-white/95 text-teal-800 shadow-lg ring-1 ring-teal-900/5 transition hover:-translate-y-0.5 hover:bg-white hover:shadow-xl"
+                aria-label="Open larger globe"
+            >
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+                    <path d="M3.7 11.7c-.6.2-.7 1.1-.1 1.5l5.7 3.8 2.4 4.2c.3.6 1.2.6 1.5 0l1.4-3.7 4.3 2.1c.7.3 1.4-.3 1.2-1l-1.6-5.8 2.3-2.7c.5-.6.1-1.5-.7-1.5l-6.5.1-9.9 3z" />
+                </svg>
+            </button>
+            <button
+                type="button"
+                data-data-mode-toggle
+                class="absolute right-4 top-4 z-30 inline-flex h-10 w-10 items-center justify-center rounded-full border border-teal-200/80 bg-white/95 text-teal-800 shadow-lg ring-1 ring-teal-900/5 transition hover:-translate-y-0.5 hover:bg-white hover:shadow-xl"
+                aria-pressed="false"
+                aria-label="Enable data mode"
+            >
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+                    <path d="M4 19h16v2H2V3h2v16zm3-2h2V9H7v8zm4 0h2V5h-2v12zm4 0h2v-6h-2v6zm4 0h2V7h-2v10z" />
+                </svg>
+            </button>
+            <div data-atlas-default class="mb-5 rounded-[24px] border border-stone-200/80 bg-white/72 p-4 shadow-sm backdrop-blur-sm">
+                <p class="text-[0.7rem] font-bold uppercase tracking-[0.12em] text-teal-900">Atlas detail</p>
+                <p class="mt-2 text-sm leading-6 text-stone-600">Data mode reveals country-level language notes and atlas references.</p>
+            </div>
+            <div data-data-info-panel data-point-theme="light" class="pointer-events-none absolute left-0 top-0 z-40 hidden overflow-visible">
+                <div data-data-info-pointer class="hidden lg:absolute lg:-left-3 lg:top-12 lg:h-6 lg:w-6 lg:rotate-45 lg:border-b lg:border-l lg:border-stone-300/80 lg:bg-white"></div>
+            </div>
+            <div class="grid min-h-[18rem] place-items-center py-2 sm:min-h-[22rem] lg:min-h-[24rem]">
+                <div class="relative aspect-square w-full max-w-[32rem] overflow-hidden rounded-full border border-stone-200 bg-[radial-gradient(circle_at_30%_25%,rgba(255,255,255,0.45),transparent_28%),radial-gradient(circle_at_65%_70%,rgba(15,118,110,0.16),transparent_42%),#f3ede4] shadow-inner [perspective:1200px]">
+                    <div
+                        data-globe-stage
+                        data-texture-url="{% static 'portal/globe/globe_texture.png' %}?v={{ globe_data_asset_version }}"
+                        data-idmap-url="{% static 'portal/globe/globe_id.png' %}?v={{ globe_data_asset_version }}"
+                        data-regions-url="{% static 'portal/globe/globe_regions.json' %}?v={{ globe_data_asset_version }}"
+                        class="absolute inset-[-2%]"
+                    ></div>
+                    <div class="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_34%_28%,rgba(255,255,255,0.72),transparent_20%),radial-gradient(circle_at_50%_50%,transparent_44%,rgba(15,23,42,0.04)_70%,rgba(15,23,42,0.34)_100%)] opacity-80"></div>
+                    <div class="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle_at_68%_72%,transparent_55%,rgba(15,23,42,0.18)_100%)]"></div>
+                    <div class="pointer-events-none absolute inset-0 rounded-full shadow-[inset_0_0_0_1px_rgba(255,255,255,0.16),inset_-36px_-44px_72px_rgba(15,23,42,0.22),inset_26px_24px_54px_rgba(255,255,255,0.18)]"></div>
+                    <div
+                        data-data-mode-indicator
+                        class="pointer-events-none absolute bottom-3 left-3 z-20 hidden items-center gap-2 rounded-full border border-teal-200/70 bg-white/92 px-3 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-teal-800 shadow-sm"
+                    >
+                        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true">
+                            <path d="M4 19h16v2H2V3h2v16zm3-2h2V9H7v8zm4 0h2V5h-2v12zm4 0h2v-6h-2v6zm4 0h2V7h-2v10z" />
+                        </svg>
+                        <span>Data mode</span>
+                    </div>
+                </div>
+            </div>
+            <div data-global-perspective class="mt-5 rounded-[24px] border border-stone-200/80 bg-white/72 p-4 shadow-sm backdrop-blur-sm">
+                <p class="text-xs font-bold uppercase tracking-[0.12em] text-teal-900">Global perspective</p>
+                <p data-globe-label class="mt-3 text-sm font-semibold text-stone-800">Hover a country</p>
+                <div data-wiki-panel class="mt-4 rounded-[20px] border border-stone-200/80 bg-[#f8f6f1] p-4">
+                    <div data-wiki-pointer class="hidden lg:absolute lg:-left-3 lg:top-10 lg:h-6 lg:w-6 lg:rotate-45 lg:border-b lg:border-l lg:border-stone-300/80 lg:bg-[#f8f6f1]"></div>
+                    <p class="text-[0.7rem] font-bold uppercase tracking-[0.12em] text-teal-900">Mini wiki</p>
+                    <h3 data-wiki-title class="mt-2 font-display text-xl font-bold text-stone-900">Location note</h3>
+                    <p data-wiki-description class="mt-1 text-sm font-semibold text-teal-900"></p>
+                    <p data-wiki-summary class="mt-2 text-sm leading-6 text-stone-600">
+                        Hover a country to read a short reference summary here.
+                    </p>
+                    <a data-wiki-link class="mt-3 hidden text-sm font-semibold text-teal-800 underline decoration-teal-300 underline-offset-2" href="#" target="_blank" rel="noreferrer">
+                        Source: Wikipedia
+                    </a>
+                </div>
+            </div>
+        </aside>
+    </section>
+
+    <section id="services" class="mt-8 lg:mt-10">
+        <div class="mb-6">
+            <p class="text-xs font-bold uppercase tracking-[0.12em] text-teal-900">Service architecture</p>
+            <h2 class="mt-3 max-w-xl font-display text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">
+                Three clear pillars for the site
+            </h2>
+        </div>
+        <div class="grid gap-4 md:grid-cols-3">
             {% for category in service_categories %}
-            <article class="card">
-                <h3>{{ category.title }}</h3>
-                <p>{{ category.description }}</p>
+            <article class="rounded-[24px] border border-stone-300/60 bg-[#fffaf2] p-6 shadow-soft">
+                <h3 class="font-display text-2xl font-bold text-stone-900">{{ category.title }}</h3>
+                <p class="mt-3 text-base leading-7 text-stone-600">{{ category.description }}</p>
             </article>
             {% endfor %}
         </div>
     </section>
-    <section class="hero">
-        <div class="hero-copy">
-            <p class="eyebrow">Language services and analytical practice</p>
-            <h1>A professional site for linguistic work, commissioned services, and data-driven insight.</h1>
-            <p class="lead">
-    Atuo com tradução técnica desde 2003, com experiência inicial na área farmacêutica e atendimento a clientes internacionais. Ao longo do tempo, consolidei uma base recorrente de trabalho e ampliei minha atuação para diferentes domínios técnicos, com uso de ferramentas de apoio à tradução e envolvimento em revisão e tratamento técnico de arquivos.
-Paralelamente, desenvolvi interesse pela área de tecnologia, o que me levou, em 2006, a atuar com qualidade de dados. Entre 2008 e 2010, colaborei com a Editora Ciência Moderna na tradução de livros técnicos de programação, com foco em bancos de dados e frameworks de desenvolvimento.
-Em 2011, participei de um projeto de implementação de CRM com a Caixa Econômica Federal, pela Infor. A partir de 2013, passei a atuar em integração de sistemas, desenvolvendo queries com base em padrões arquiteturais e documentação técnica.
-Desde 2018, integro a equipe de tradução e interpretação sediada no Palácio Itamaraty, no âmbito da Agência Brasileira de Cooperação (ABC), onde atualmente atuo como tradutor responsável, com foco na organização e distribuição equilibrada das demandas.
-Em 2019, concluí uma pós-graduação em Business Intelligence, consolidando minha atuação também na área de dados.
-Hoje, aplico esse conhecimento na estruturação e análise de dados operacionais da equipe, desenvolvendo modelos e relatórios de desempenho que apoiam a gestão e a tomada de decisão.
-Minha atuação se concentra na interface entre linguagem e tecnologia, integrando tradução técnica, dados e sistemas em um único fluxo de trabalho.
-            </p>
-            <div class="hero-actions">
-                <a class="button button-primary" href="#services">Explore services</a>
-                <a class="button button-secondary" href="#data-work">View data focus</a>
-            </div>
-        </div>
-        <aside class="hero-panel">
-            <p class="panel-label">Current foundation</p>
-            <ul>
-                {% for item in highlights %}
-                <li>{{ item }}</li>
-                {% endfor %}
-            </ul>
-        </aside>
-    </section>
 
-
-    <section class="feature-split" id="data-work">
+    <section id="data-work" class="mt-8 grid gap-6 rounded-[28px] border border-stone-300/60 bg-white/75 p-8 shadow-soft backdrop-blur-md lg:grid-cols-2 lg:p-10">
         <div>
-            <p class="eyebrow">First visualization track</p>
-            <h2>Your own professional output can become the first analytical narrative.</h2>
+            <p class="text-xs font-bold uppercase tracking-[0.12em] text-teal-900">First visualization track</p>
+            <h2 class="mt-3 max-w-lg font-display text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">
+                Your own professional output can become the first analytical narrative.
+            </h2>
         </div>
-        <div>
+        <div class="space-y-4 text-base leading-8 text-stone-600 sm:text-lg">
             <p>
                 A strong first project is to visualize your translation, interpreting, and revision activity over time:
                 volume, language pairs, subject areas, delivery rhythms, and service mix. That gives the site both a
@@ -65,4 +140,34 @@ Minha atuação se concentra na interface entre linguagem e tecnologia, integran
         </div>
     </section>
 </main>
+
+<div
+    data-globe-modal
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-black/65 px-4 py-6 backdrop-blur-sm"
+>
+        <div class="relative flex h-[min(90vh,920px)] w-[min(92vw,1280px)] items-center justify-center rounded-[32px] border border-white/15 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] p-4 shadow-2xl">
+            <button
+                type="button"
+                data-globe-close
+                class="absolute right-4 top-4 z-20 rounded-full border border-white/20 bg-white/90 px-4 py-2 text-sm font-semibold text-stone-900 shadow-md transition hover:bg-white"
+        >
+            Close
+        </button>
+        <div
+            data-globe-stage-expanded
+            data-texture-url="{% static 'portal/globe/globe_texture.png' %}?v={{ globe_data_asset_version }}"
+            data-idmap-url="{% static 'portal/globe/globe_id.png' %}?v={{ globe_data_asset_version }}"
+            data-regions-url="{% static 'portal/globe/globe_regions.json' %}?v={{ globe_data_asset_version }}"
+            tabindex="0"
+            class="relative h-full w-full overflow-hidden rounded-[28px] bg-[radial-gradient(circle_at_30%_25%,rgba(255,255,255,0.12),transparent_28%),radial-gradient(circle_at_65%_70%,rgba(15,118,110,0.12),transparent_42%),#0f172a]"
+        ></div>
+        <div data-data-info-panel data-point-theme="dark" class="absolute bottom-6 left-6 z-20 w-[min(22rem,calc(100%-3rem))] rounded-[24px] border border-white/15 bg-slate-950/82 p-4 text-white shadow-2xl backdrop-blur-md">
+            <p class="text-[0.7rem] font-bold uppercase tracking-[0.12em] text-emerald-200">Atlas detail</p>
+            <p class="mt-2 text-sm leading-6 text-slate-200">Turn on data mode and hover a country to inspect its atlas card here.</p>
+        </div>
+    </div>
+</div>
+
+{{ globe_data_points|json_script:"globe-data-points" }}
+<script type="module" src="{% static 'js/globe.js' %}?v={{ globe_asset_version }}"></script>
 {% endblock %}

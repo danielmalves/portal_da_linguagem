@@ -1,0 +1,6 @@
+country_name,iso2,iso3,language_name,language_role,language_code_iso639,source_id,source_url,notes
+Brazil,BR,BRA,Portuguese,official,por,UNESCO_WAL,https://www.unesco.org/en/world-atlas-languages,Sample atlas point
+Portugal,PT,PRT,Portuguese,official,por,UNESCO_WAL,https://www.unesco.org/en/world-atlas-languages,Sample atlas point
+Angola,AO,AGO,Portuguese,official,por,UNESCO_WAL,https://www.unesco.org/en/world-atlas-languages,Sample atlas point
+Mozambique,MZ,MOZ,Portuguese,official,por,UNESCO_WAL,https://www.unesco.org/en/world-atlas-languages,Sample atlas point
+Cape Verde,CV,CPV,Portuguese,official,por,UNESCO_WAL,https://www.unesco.org/en/world-atlas-languages,Sample atlas point
