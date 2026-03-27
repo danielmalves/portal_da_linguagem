@@ -15,6 +15,24 @@ Environment setup:
 3. `.\.venv\Scripts\python.exe -m pip install -r requirements.txt`
 4. `.\.venv\Scripts\python.exe .\manage.py runserver`
 
+Notebook workflow:
+1. First machine setup:
+   `.\scripts\setup-notebook.ps1`
+2. Daily sync on the notebook:
+   `.\scripts\update-notebook.ps1`
+3. Start local development:
+   `.\scripts\start-dev.ps1`
+4. If PowerShell blocks local scripts:
+   `Set-ExecutionPolicy -Scope Process Bypass`
+
+Suggested daily rhythm:
+1. `git status`
+2. If clean, run `.\scripts\update-notebook.ps1`
+3. Work normally
+4. Before switching machines:
+   `git status`
+5. Commit and push from the machine you used last
+
 Recommended next build steps:
 1. Replace placeholder homepage copy with your real biography, services, and contact flow.
 2. Add a dedicated commission brief form for clients.
